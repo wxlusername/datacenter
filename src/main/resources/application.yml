@@ -11,5 +11,5 @@ spring:
           url: jdbc:mysql://sop.cmkoke8osppd.rds.cn-northwest-1.amazonaws.com.cn/sop?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
           username: sop
           password: sfvavz02
-          driver-class-name: com.mysql.jdbc.Driver
+          driver-class-name: com.mysql.cj.jdbc.Driver
       primary: trader
