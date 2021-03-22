@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        trader:
+          url: jdbc:sqlserver://52.82.105.72;DatabaseName=TradeOrder11
+          username: sa
+          password: 4UHsIEHBinA9puEu
+          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        sop:
+          url: jdbc:mysql://sop.cmkoke8osppd.rds.cn-northwest-1.amazonaws.com.cn/sop?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+          username: sop
+          password: sfvavz02
+          driver-class-name: com.mysql.jdbc.Driver
+      primary: trader
