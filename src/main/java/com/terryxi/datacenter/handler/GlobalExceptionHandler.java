@@ -13,8 +13,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
-    public Response<Object> unknownExceptionHandler(Exception e) {
+    public Response unknownExceptionHandler(Exception e) {
         e.printStackTrace();
-        return new Response<>(-1,"系统未知错误");
+        return new Response(-1,"系统未知错误");
     }
 }

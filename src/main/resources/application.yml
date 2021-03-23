@@ -2,7 +2,7 @@ spring:
   datasource:
     dynamic:
       datasource:
-        trader:
+        trade:
           url: jdbc:sqlserver://52.82.105.72;DatabaseName=TradeOrder11
           username: sa
           password: 4UHsIEHBinA9puEu
@@ -12,4 +12,4 @@ spring:
           username: sop
           password: sfvavz02
           driver-class-name: com.mysql.cj.jdbc.Driver
-      primary: trader
+      primary: trade

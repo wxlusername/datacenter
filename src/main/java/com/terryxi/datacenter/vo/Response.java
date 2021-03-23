@@ -1,16 +1,16 @@
 package com.terryxi.datacenter.vo;
 
-public class Response<T> {
+public class Response {
 
     private int status = 1;
     private String errorMsg;
-    private T data;
+    private Object data;
 
     public Response() {
         super();
     }
 
-    public Response(T data) {
+    public Response(Object data) {
         this.data = data;
     }
 
@@ -36,11 +36,11 @@ public class Response<T> {
         this.errorMsg = errorMsg;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
