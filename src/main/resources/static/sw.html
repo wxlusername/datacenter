@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"
+            integrity="sha256-NZlQFkif+Cpc0rqEGGpSmaU55Vw4aMWK5KC3BRACd/Q=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 100%;height:900px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+
+    $.when(
+        $.getJSON('http://10.101.10.91:8080/s/w')
+    ).done(function (res) {
+        var myChart = echarts.init(document.getElementById('main'));
+        var data = res.data
+// 指定图表的配置项和数据
+        var option = {
+            grid: {
+                top: 10,
+                bottom: 30,
+                left: 150,
+                right: 80
+            },
+            xAxis: {
+                show: false
+            },
+            yAxis: {
+                type: 'category',
+                inverse: true,
+                max: 9,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 14
+                    },
+                    rich: {
+                        flag: {
+                            fontSize: 25,
+                            padding: 5
+                        }
+                    }
+                },
+                animationDuration: 300,
+                animationDurationUpdate: 300
+            },
+            series: [{
+                realtimeSort: true,
+                seriesLayoutBy: 'column',
+                type: 'bar',
+                data: data,
+                encode: {
+                    x: 1,
+                    y: 0
+                },
+                label: {
+                    show: false,
+                    precision: 1,
+                    position: 'right',
+                    valueAnimation: true,
+                    fontFamily: 'monospace'
+                }
+            }],
+            animationDuration: 0,
+            animationDurationUpdate: 2000,
+            animationEasing: 'linear',
+            animationEasingUpdate: 'linear',
+            graphic: {
+                elements: [{
+                    type: 'text',
+                    right: 160,
+                    bottom: 60,
+                    style: {
+                        text: data[0][2],
+                        font: 'bolder 80px monospace',
+                        fill: 'rgba(100, 100, 100, 0.25)'
+                    },
+                    z: 100
+                }]
+            }
+        };
+
+        myChart.setOption(option);
+
+        function run() {
+            $.when(
+                $.getJSON('http://localhost:8080/s/w')
+            ).done(function (res) {
+                var data = res.data
+                option.series[0].data = data
+                option.graphic.elements[0].style.text = data[0][2];
+                myChart.setOption(option);
+            })
+
+        }
+
+        setInterval(function () {
+            run();
+        }, 1000 * 60 * 5);
+    })
+</script>
+</body>
+</html>
