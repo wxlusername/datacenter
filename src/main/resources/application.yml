@@ -15,3 +15,7 @@ spring:
       primary: trade
   jackson:
     default-property-inclusion: non_null
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
