@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.terryxi.datacenter.mapper.TradeOrderMapper">
+
+    <select id="getSaleStatisticsByDate" resultType="com.terryxi.datacenter.vo.SaleStatisticsVO">
+        select groupName groupName,NickName nickName,
+        sum(IIF(ISNUMERIC(TotalPrice) = 1, CONVERT(decimal(19, 2), ISNULL(TotalPrice, 0)), 0)) totalAmount
+        from OrderInfo
+        left join UserInfo on UserID=UserInfo.ID
+        left join AuthorityGroup AG on UserInfo.groupId = AG.Id
+        where SaleDate>#{startDate}
+        and SaleDate &lt; #{endDate}
+        and OrderState!=5
+        and UserID!=245
+        group by groupName,NickName
+    </select>
+
+</mapper>

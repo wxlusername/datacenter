@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.terryxi.datacenter.mapper.SopOrderMapper">
+
+    <select id="getSaleStatisticsByDate" resultType="com.terryxi.datacenter.vo.SaleStatisticsVO">
+        select name groupName,cn_name nickName,sum(order_total_amount)totalAmount from order_info
+        left join sys_user on user_id=sys_user.id
+        left join sys_office so on office_id = so.id
+        where order_info.create_date>#{startDate}
+        and order_info.create_date &lt; #{endDate}
+        and sys_status not in (8,10)
+        group by cn_name,name;
+    </select>
+
+</mapper>
